@@ -59,6 +59,7 @@ const AddPost = () => {
             email: user?.email,
             name: user?.displayName,
             status: "unlisted",
+            postType: "normal",
           };
 
           // save post info to db

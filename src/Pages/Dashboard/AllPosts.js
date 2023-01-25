@@ -55,6 +55,38 @@ const AllPosts = () => {
       });
   };
 
+  const handleFetured = (id) => {
+    fetch(`http://localhost:5000/featuredpost/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Featured Successfully.");
+          refetch();
+        }
+      });
+  };
+
+  const handleNormal = (id) => {
+    fetch(`http://localhost:5000/normalpost/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Featured Removed Successfully.");
+          refetch();
+        }
+      });
+  };
+
   const handleDelete = (id) => {
     const agree = window.confirm(`Are you sure to delete the post?`);
     if (agree) {
@@ -87,6 +119,7 @@ const AllPosts = () => {
               <th>Image</th>
               <th>Title</th>
               <th>Status</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -103,7 +136,11 @@ const AllPosts = () => {
                       className="w-[70px] rounded-xl"
                     />
                   </td>
-                  <td>{post.postTitle}</td>
+                  <td>
+                    {post.postTitle?.length > 25
+                      ? post.postTitle.slice(0, 25)
+                      : post.postTitle}
+                  </td>
                   <td>
                     {post.status === "unlisted" && (
                       <>
@@ -127,6 +164,33 @@ const AllPosts = () => {
                         >
                           <FaCheckCircle />
                           Make Unavailable
+                        </button>
+                      </>
+                    )}
+                  </td>
+                  <td>
+                    {post.postType === "normal" && (
+                      <>
+                        <button
+                          onClick={() => handleFetured(post?._id)}
+                          className="btn btn-primary btn-xs"
+                        >
+                          Make Featured
+                        </button>
+                      </>
+                    )}
+                    {post.postType === "featured" && (
+                      <>
+                        <p className="text-[#a0a0e8] flex style">
+                          <FaCheckCircle />
+                          Featured
+                        </p>
+                        <button
+                          onClick={() => handleNormal(post?._id)}
+                          className="btn btn-primary btn-xs"
+                        >
+                          <FaCheckCircle />
+                          Make Normal
                         </button>
                       </>
                     )}
