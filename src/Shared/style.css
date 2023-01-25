@@ -1,0 +1,7 @@
+.style {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-align: justify;
+  font-style: italic;
+}
