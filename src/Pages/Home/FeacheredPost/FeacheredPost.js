@@ -30,6 +30,7 @@ const FeacheredPost = () => {
           {posts?.length &&
             posts
               .filter((post) => post.postType === "featured")
+              .reverse()
               .map((post) => <PostCard key={post?._id} post={post}></PostCard>)}
         </div>
       </div>

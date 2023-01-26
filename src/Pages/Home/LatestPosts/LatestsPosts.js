@@ -26,6 +26,7 @@ const LatestsPosts = () => {
       {posts?.length &&
         posts
           .filter((post) => post.status === "published")
+          .reverse()
           .map((post) => (
             <LatestPostCard key={post?._id} post={post}></LatestPostCard>
           ))}

@@ -48,7 +48,7 @@ const Header = () => {
   );
 
   return (
-    <div className="bg-[#364F6B] px-5">
+    <div className="bg-[#1171df] px-5">
       <div className="navbar flex justify-between">
         <div className="navbar-start">
           <div className="flex text-white">

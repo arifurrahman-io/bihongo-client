@@ -8,7 +8,7 @@ const MyComments = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState({});
 
-  const url = `http://localhost:5000/myreviews?email=${user?.email}`;
+  const url = `https://server.bihongo.net/myreviews?email=${user?.email}`;
 
   const { data: posts = [], refetch } = useQuery({
     queryKey: ["posts", user?.email],
@@ -26,7 +26,7 @@ const MyComments = () => {
   const handleDelete = (id) => {
     const agree = window.confirm(`Are you sure to delete the post?`);
     if (agree) {
-      fetch(`http://localhost:5000/deletereview/${id}`, {
+      fetch(`https://server.bihongo.net/deletereview/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

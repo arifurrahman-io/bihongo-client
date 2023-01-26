@@ -13,7 +13,7 @@ const CommentSection = ({ post, id }) => {
   const [review, setReview] = useState({});
   const [reviews, setReviews] = useState({});
 
-  const url = `http://localhost:5000/reviews?id=${id}`;
+  const url = `https://server.bihongo.net/reviews?id=${id}`;
 
   const { data: myReview = [], refetch } = useQuery({
     queryKey: ["myReview", user?.email],
@@ -34,7 +34,7 @@ const CommentSection = ({ post, id }) => {
     console.log(review);
 
     if (user?.email) {
-      fetch("http://localhost:5000/reviews", {
+      fetch("https://server.bihongo.net/reviews", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -80,7 +80,9 @@ const CommentSection = ({ post, id }) => {
           <>
             <div className="card w-full shadow bg-sky-50 my-10">
               <div className="flex justify-start align-middle">
-                <h3 className="text-2xl ml-2">{user.displayName}</h3>
+                <h3 className="text-lg ml-2 font-semibold">
+                  {user.displayName}
+                </h3>
               </div>
               <form onSubmit={handleAddReview} className="p-2">
                 <div className="form-control">
@@ -114,8 +116,13 @@ const CommentSection = ({ post, id }) => {
         <div>
           <h3>Total Reviews: {reviews.length}</h3>
           <div className="my-5 grid md:grid-cols-2 gap-5">
-            {reviews?.length &&
-              reviews.map((r) => <ReviewRow key={r.id} r={r}></ReviewRow>)}
+            {reviews?.length ? (
+              reviews
+                .reverse()
+                .map((r) => <ReviewRow key={r.id} r={r}></ReviewRow>)
+            ) : (
+              <p>No Reviews Found!</p>
+            )}
           </div>
         </div>
       </div>

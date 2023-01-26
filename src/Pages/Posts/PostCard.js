@@ -26,7 +26,7 @@ const PostCard = ({ post }) => {
           <h2 className="card-title">{postTitle}</h2>
           <p>
             {description1.length > 100
-              ? description1.slice(0, 100) + `...`
+              ? description1.slice(0, 100) + `... Read More`
               : description1}
           </p>
 
