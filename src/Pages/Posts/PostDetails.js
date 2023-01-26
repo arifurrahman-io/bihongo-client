@@ -11,9 +11,8 @@ import {
   TelegramIcon,
   EmailIcon,
   EmailShareButton,
-  LinkedinShareButton,
-  LinkedinIcon,
 } from "react-share";
+import CommentSection from "./CommentSection";
 
 const PostDetails = () => {
   const post = useLoaderData();
@@ -85,7 +84,7 @@ const PostDetails = () => {
         <div>
                 
           <FacebookShareButton
-            url={`http://localhost:5000/post/${_id}`}
+            url={`https://bihongo.net/post/${_id}`}
             quote={postTitle}
             hashtag="#bihongo.net"
           >
@@ -94,7 +93,7 @@ const PostDetails = () => {
                   
           </FacebookShareButton>
           <WhatsappShareButton
-            url={`http://localhost:5000/post/${_id}`}
+            url={`https://bihongo.net/post/${_id}`}
             quote={postTitle}
             hashtag="#bihongo.net"
           >
@@ -103,7 +102,7 @@ const PostDetails = () => {
                   
           </WhatsappShareButton>
           <TelegramShareButton
-            url={`http://localhost:5000/post/${_id}`}
+            url={`https://bihongo.net/post/${_id}`}
             quote={postTitle}
             hashtag="#bihongo.net"
           >
@@ -112,7 +111,7 @@ const PostDetails = () => {
                   
           </TelegramShareButton>
           <EmailShareButton
-            url={`http://localhost:5000/post/${_id}`}
+            url={`https://bihongo.net/post/${_id}`}
             quote={postTitle}
             hashtag="#bihongo.net"
           >
@@ -120,18 +119,10 @@ const PostDetails = () => {
             <EmailIcon size={32} round />
                   
           </EmailShareButton>
-          <LinkedinShareButton
-            url={`http://localhost:5000/post/${_id}`}
-            quote={postTitle}
-            hashtag="#bihongo.net"
-          >
-                    
-            <LinkedinIcon size={32} round />
-                  
-          </LinkedinShareButton>
               
         </div>
       </div>
+      <CommentSection post={post} id={_id}></CommentSection>
     </div>
   );
 };

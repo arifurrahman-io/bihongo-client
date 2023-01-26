@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/allposts`;
+  const url = `https://server.bihongo.net/allposts`;
 
   const { data: posts = [] } = useQuery({
     queryKey: ["posts", user?.email],

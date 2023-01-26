@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import Loading from "../../Shared/Loading/Loading";
 import img from "../../assets/signup.jpg";
@@ -44,7 +44,7 @@ const SignUp = () => {
 
   const saveUser = (name, email, phone, userType = "user") => {
     const user = { name, email, phone, userType };
-    fetch("http://localhost:5000/users", {
+    fetch("https://server.bihongo.net/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -147,6 +147,12 @@ const SignUp = () => {
               type="submit"
             />
           </form>
+          <p className="mt-5">
+            Already registered? Please
+            <Link to="/signin" className="btn btn-link">
+              signin
+            </Link>
+          </p>
         </div>
       </div>
     </div>

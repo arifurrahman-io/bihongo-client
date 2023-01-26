@@ -6,7 +6,7 @@ import LatestPostCard from "./LatestPostCard";
 const LatestsPosts = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/allposts`;
+  const url = `https://server.bihongo.net/allposts`;
 
   const { data: posts = [] } = useQuery({
     queryKey: ["posts", user?.email],

@@ -5,6 +5,7 @@ import AddPost from "../Pages/Dashboard/AddPost";
 import AllPosts from "../Pages/Dashboard/AllPosts";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyComments from "../Pages/Dashboard/MyComments";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import PostDetails from "../Pages/Posts/PostDetails";
 import Posts from "../Pages/Posts/Posts";
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
         path: "/post/:id",
         element: <PostDetails></PostDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/post/${params.id}`),
+          fetch(`https://server.bihongo.net/post/${params.id}`),
+      },
+      {
+        path: "*",
+        element: <ErrorPage></ErrorPage>,
       },
     ],
   },

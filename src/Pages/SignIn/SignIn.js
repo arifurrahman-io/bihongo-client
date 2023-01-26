@@ -2,7 +2,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import img from "../../assets/signin.jpg";
 import useToken from "../../hooks/useToken";
@@ -60,7 +60,7 @@ const SignIn = () => {
 
   const saveUser = (name, email, phone) => {
     const user = { name, email, phone };
-    fetch(`http://localhost:5000/user/${email}`, {
+    fetch(`https://server.bihongo.net/user/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -137,6 +137,12 @@ const SignIn = () => {
               <img src="" alt="" className="w-1/2 mx-auto" />
             </button>
           </div>
+          <p className="mt-5">
+            New here? Please{" "}
+            <Link to="/signup" className="btn btn-link">
+              signup
+            </Link>
+          </p>
         </div>
       </div>
     </div>

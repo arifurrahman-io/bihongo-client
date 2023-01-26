@@ -14,13 +14,13 @@ const PostCard = ({ post }) => {
   } = post;
   return (
     <div className="card glass h-[550px] transition hover:duration-150 ease-in-out rounded-xl">
-      <Link to={`/post/${_id}`}>
+      <Link to={`/post/${_id}`} className="">
         <figure>
-          <img src={image} alt="img" className="rounded-t-xl w-full h-80" />
+          <img src={image} alt="img" className="rounded-t-xl" />
         </figure>
-        <div className="flex">
-          <p className="btn btn-xs mt-[-30px] ml-5">{category}</p>
-          <p className="btn btn-xs mt-[-30px] ml-5">{tag}</p>
+        <div className="flex justify-center">
+          <p className="mt-[-30px] ml-5 text-white">{category}</p>
+          <p className="mt-[-30px] ml-5 text-white">{tag}</p>
         </div>
         <div className="card-body">
           <h2 className="card-title">{postTitle}</h2>

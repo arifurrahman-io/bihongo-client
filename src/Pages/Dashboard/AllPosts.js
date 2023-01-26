@@ -8,7 +8,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const AllPosts = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/allposts`;
+  const url = `https://server.bihongo.net/allposts`;
 
   const { data: posts = [], refetch } = useQuery({
     queryKey: ["posts", user?.email],
@@ -24,7 +24,7 @@ const AllPosts = () => {
   });
 
   const handleAdvertise = (id) => {
-    fetch(`http://localhost:5000/verifypost/${id}`, {
+    fetch(`https://server.bihongo.net/verifypost/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -40,7 +40,7 @@ const AllPosts = () => {
   };
 
   const handleUnlist = (id) => {
-    fetch(`http://localhost:5000/unlistpost/${id}`, {
+    fetch(`https://server.bihongo.net/unlistpost/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -56,7 +56,7 @@ const AllPosts = () => {
   };
 
   const handleFetured = (id) => {
-    fetch(`http://localhost:5000/featuredpost/${id}`, {
+    fetch(`https://server.bihongo.net/featuredpost/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -72,7 +72,7 @@ const AllPosts = () => {
   };
 
   const handleNormal = (id) => {
-    fetch(`http://localhost:5000/normalpost/${id}`, {
+    fetch(`https://server.bihongo.net/normalpost/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -90,7 +90,7 @@ const AllPosts = () => {
   const handleDelete = (id) => {
     const agree = window.confirm(`Are you sure to delete the post?`);
     if (agree) {
-      fetch(`http://localhost:5000/deletepost/${id}`, {
+      fetch(`https://server.bihongo.net/deletepost/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

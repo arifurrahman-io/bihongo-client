@@ -63,7 +63,7 @@ const AddPost = () => {
           };
 
           // save post info to db
-          fetch(" http://localhost:5000/posts", {
+          fetch(" https://server.bihongo.net/posts", {
             method: "POST",
             headers: {
               "content-type": "application/json",
