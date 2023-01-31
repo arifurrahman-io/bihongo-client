@@ -1,16 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaCheckCircle, FaTrashAlt, FaEdit, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import Loading from "../../Shared/Loading/Loading";
+import Modal from "../../Shared/Modal/Modal";
 
 const AllPosts = () => {
   const { user } = useContext(AuthContext);
+  const [editPost, setEditPost] = useState(null);
 
   const url = `https://server.bihongo.net/allposts`;
 
-  const { data: posts = [], refetch } = useQuery({
+  const {
+    data: posts = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["posts", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
@@ -86,6 +93,10 @@ const AllPosts = () => {
         }
       });
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   const handleDelete = (id) => {
     const agree = window.confirm(`Are you sure to delete the post?`);
@@ -200,10 +211,13 @@ const AllPosts = () => {
                       <FaRegEye className="text-2xl text-accent m-2" />
                     </Link>
 
-                    <FaEdit
-                      onClick={() => handleDelete(post?._id)}
+                    <label
+                      htmlFor="my-modal"
+                      onClick={() => setEditPost(post)}
                       className="text-2xl text-primary m-2"
-                    />
+                    >
+                      <FaEdit />
+                    </label>
                     <FaTrashAlt
                       onClick={() => handleDelete(post?._id)}
                       className="text-2xl text-secondary m-2"
@@ -214,6 +228,9 @@ const AllPosts = () => {
           </tbody>
         </table>
       </div>
+      {editPost && (
+        <Modal editPost={editPost} setEditPost={setEditPost}></Modal>
+      )}
     </div>
   );
 };

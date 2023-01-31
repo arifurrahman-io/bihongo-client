@@ -1,17 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/AuthProvider";
 import { FaTrashAlt } from "react-icons/fa";
+import Loading from "../../Shared/Loading/Loading";
 
 const MyComments = () => {
   const { user } = useContext(AuthContext);
-  const [reviews, setReviews] = useState({});
 
   const url = `https://server.bihongo.net/myreviews?email=${user?.email}`;
-
-  const { data: posts = [], refetch } = useQuery({
-    queryKey: ["posts", user?.email],
+  const {
+    data: reviews = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["reviews", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
@@ -19,7 +22,7 @@ const MyComments = () => {
         },
       });
       const data = await res.json();
-      return setReviews(data);
+      return data;
     },
   });
 
@@ -39,6 +42,10 @@ const MyComments = () => {
         });
     }
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div>
@@ -79,12 +86,14 @@ const MyComments = () => {
                       ? rev.review.slice(0, 25)
                       : rev.review}
                   </td>
-                  <td className="flex">
-                    <FaTrashAlt
-                      onClick={() => handleDelete(rev?._id)}
-                      className="text-2xl text-secondary m-2"
-                    />
-                  </td>
+                  <div>
+                    <td className="flex">
+                      <FaTrashAlt
+                        onClick={() => handleDelete(rev?._id)}
+                        className="text-2xl text-secondary m-2"
+                      />
+                    </td>
+                  </div>
                 </tr>
               ))}
           </tbody>

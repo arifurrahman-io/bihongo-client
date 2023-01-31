@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import Loading from "../../Shared/Loading/Loading";
 import PostCard from "./PostCard";
 
 const Posts = () => {
@@ -8,7 +9,7 @@ const Posts = () => {
 
   const url = `https://server.bihongo.net/allposts`;
 
-  const { data: posts = [] } = useQuery({
+  const { data: posts = [], isLoading } = useQuery({
     queryKey: ["posts", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
@@ -21,11 +22,16 @@ const Posts = () => {
     },
   });
 
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div className="max-w-[1440px] mx-auto py-3 md:py-10 grid grid-cols-1 md:grid-cols-3 gap-5">
       {posts?.length &&
         posts
           .filter((post) => post.status === "published")
+          .reverse()
           .map((post) => <PostCard key={post?._id} post={post}></PostCard>)}
     </div>
   );

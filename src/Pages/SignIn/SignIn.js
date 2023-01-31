@@ -6,11 +6,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import img from "../../assets/signin.jpg";
 import useToken from "../../hooks/useToken";
+import Loading from "../../Shared/Loading/Loading";
 
 const SignIn = () => {
   const {
     register,
     handleSubmit,
+    isLoading,
     formState: { errors },
   } = useForm();
   const { signIn, providerLogin } = useContext(AuthContext);
@@ -74,6 +76,10 @@ const SignIn = () => {
         setCreatedUserEmail(user.email);
       });
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="py-8 lg:py-16">

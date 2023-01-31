@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import Loading from "../../Shared/Loading/Loading";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
@@ -11,6 +12,7 @@ const AddPost = () => {
     register,
     handleSubmit,
     formState: { errors },
+    isLoading,
   } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -79,9 +81,9 @@ const AddPost = () => {
         }
       });
   };
-  //   if (isLoading) {
-  //     return <Loading></Loading>;
-  //   }
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="w-full mx-auto">

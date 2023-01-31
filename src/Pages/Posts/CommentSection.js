@@ -11,12 +11,11 @@ const CommentSection = ({ post, id }) => {
   const email = user?.email;
 
   const [review, setReview] = useState({});
-  const [reviews, setReviews] = useState({});
 
   const url = `https://server.bihongo.net/reviews?id=${id}`;
 
-  const { data: myReview = [], refetch } = useQuery({
-    queryKey: ["myReview", user?.email],
+  const { data: reviews = [], refetch } = useQuery({
+    queryKey: ["reviews", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
@@ -24,7 +23,7 @@ const CommentSection = ({ post, id }) => {
         },
       });
       const data = await res.json();
-      return setReviews(data);
+      return data;
     },
   });
 

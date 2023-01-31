@@ -13,10 +13,14 @@ const PostCard = ({ post }) => {
     name,
   } = post;
   return (
-    <div className="card glass h-[550px] transition hover:duration-150 ease-in-out rounded-xl">
+    <div className="card glass transition hover:duration-150 ease-in-out rounded-xl mx-3">
       <Link to={`/post/${_id}`} className="">
         <figure>
-          <img src={image} alt="img" className="rounded-t-xl" />
+          <img
+            src={image}
+            alt="img"
+            className="rounded-t-xl w-full h-[300px]"
+          />
         </figure>
         <div className="flex justify-center">
           <p className="mt-[-30px] ml-5 text-white">{category}</p>
@@ -30,7 +34,7 @@ const PostCard = ({ post }) => {
               : description1}
           </p>
 
-          <div className="absolute w-full bottom-0 left-0 right-0 p-5">
+          <div className="absolute w-full bottom-0 left-0 right-0 px-5">
             <hr></hr>
             <div className="flex justify-evenly text-center">
               <p>{name}</p>
@@ -44,3 +48,5 @@ const PostCard = ({ post }) => {
 };
 
 export default PostCard;
+
+// absolute w-full bottom-0 left-0 right-0

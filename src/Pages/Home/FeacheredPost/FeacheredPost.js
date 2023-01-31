@@ -25,7 +25,7 @@ const FeacheredPost = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-[1440px] mx-auto mt-20 px-5">
       <div className="col-span-3">
-        <p className="text-3xl font-bold">Feachered Posts</p>
+        <p className="text-3xl font-bold">Featured Posts</p>
         <div className="max-w-[1440px] mx-auto py-3 md:py-10 grid grid-cols-1 md:grid-cols-2 gap-5">
           {posts?.length &&
             posts

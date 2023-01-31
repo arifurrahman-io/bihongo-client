@@ -38,9 +38,15 @@ const DashboardLayout = () => {
                 <li>
                   <Link to="/dashboard/addpost">Add Post</Link>
                 </li>
+                <li>
+                  <Link to="/dashboard/mycomments">My Comments</Link>
+                </li>
               </>
             ) : (
               <>
+                <li>
+                  <Link to="/dashboard/addpost">Add Post</Link>
+                </li>
                 <li>
                   <Link to="/dashboard/mycomments">My Comments</Link>
                 </li>
